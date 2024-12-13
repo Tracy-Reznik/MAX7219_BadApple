@@ -2,7 +2,7 @@
 
 本项目是基于Arduino框架和Python语言，采用MAX7219实现的BadApple点阵屏
 
-
+B站地址：https://www.bilibili.com/video/BV1ZTBMY9Euq/
 
 ## 项目结构
 
@@ -36,3 +36,13 @@ CLK ---- PA5
 ### 上位机程序
 
 准备Python环境，依次安装代码里所需的包，然后修改config.py内的各种参数，双击badapple.py，即可欣赏badapple了
+
+
+
+## 视频素材来源
+
+Bad Apple！！：https://www.bilibili.com/video/BV1xx411c79H/
+
+【原神拜年纪】（MMD）原神的BadApple！！：https://www.bilibili.com/video/BV1nR4y1j7yW
+
+【第五人格/合作MMD】bad apple：https://www.bilibili.com/video/BV1vW411Z7WF/
