@@ -1,3 +1,5 @@
+import os
+
 import cv2
 import numpy as np
 import serial
@@ -88,12 +90,14 @@ def play_audio(audio_path):
 def main():
     # 设置路径
     video_path = 'badapple.mp4'
-    audio_path = 'badapple_audio.mp3'
-    frame_data_path = 'badapple_frames.npy'
+    audio_path = f'{video_path}_audio.mp3'
+    frame_data_path = f'{video_path}_frames.npy'
 
     # 加载或生成帧数据
     try:
         frames, fps = load_binary_frames(frame_data_path)
+        if not os.path.isfile(audio_path):
+            raise FileNotFoundError("Audio is not a file")
     except FileNotFoundError:
         frames, fps = video_to_binary_frames_with_padding(video_path, output_path=frame_data_path)
 
