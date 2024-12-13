@@ -22,7 +22,15 @@ B站地址：https://www.bilibili.com/video/BV1ZTBMY9Euq/
 
 在Arduino IDE里依次打开文件/首选项/其他开发板管理器地址，将https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json粘贴到里面，搭建STM32开发环境，然后在开发板管理器里选择STM32F1 Boards，安装好后在上方选择STM32F103C开头的开发板，准备一块STM32C8T6，将本程序烧录到开发板内
 
-烧录完成后，将MAX7219模块的输入端引脚依次连接到开发板的PA4，PA5，PA7，顺序如下
+烧录完成后，首先将8个MAX7219点阵模块按照
+
+``````
+1 2 3 4
+5 6 7 8
+``````
+
+的序列依次排列串接，也可以直接使用某宝上的8连装的MAX7219模块，然后将第一个MAX7219模块的输入端引脚依次连接到开发板的PA4，PA5，PA7，顺序如下
+
 ```
 VCC ---- 3.3
 GND ---- GND
