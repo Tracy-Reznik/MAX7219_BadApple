@@ -89,18 +89,18 @@ def play_audio(audio_path):
 
 def main():
     # 设置路径
-    video_path = 'badapple.mp4'
+    video_path = 'dwrg.mp4'
     audio_path = f'{video_path}_audio.mp3'
     frame_data_path = f'{video_path}_frames.npy'
 
     # 加载或生成帧数据
+    if not os.path.isfile(audio_path):
+        os.system(f"ffmpeg -i {video_path} -q:a 0 -map a {audio_path}")
     try:
         frames, fps = load_binary_frames(frame_data_path)
-        if not os.path.isfile(audio_path):
-            raise FileNotFoundError("Audio is not a file")
+
     except FileNotFoundError:
         frames, fps = video_to_binary_frames_with_padding(video_path, output_path=frame_data_path)
-
     # 打开串口并发送视频帧
     try:
         with serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1) as ser:
@@ -110,7 +110,6 @@ def main():
             # 使用音频时间控制视频帧发送
             frame_interval = 1 / fps  # 每帧间隔时间
             total_frames = len(frames)
-
             while pygame.mixer.music.get_busy():  # 当音乐还在播放时
                 audio_time = pygame.mixer.music.get_pos() / 1000.0  # 获取音频播放时间（秒）
                 current_frame = int(audio_time / frame_interval)  # 计算应发送的当前帧
