@@ -5,6 +5,8 @@ import numpy as np
 import serial
 import time
 import pygame  # 用于音频播放
+
+import config
 from config import BAUD_RATE, SERIAL_PORT
 from lib.lib import send_matrix, matrix_to_dot_matrix
 
@@ -123,7 +125,7 @@ def main(video_path):
 
 
 if __name__ == "__main__":
-    video_paths=['badapple.mp4']
+    video_paths=config.VIDEO_PATHS
     try:
         for video_path in video_paths:
             main(video_path)
