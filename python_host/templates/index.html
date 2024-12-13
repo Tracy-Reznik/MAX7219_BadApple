@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点阵屏控制面板</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(32, 20px);
+            grid-gap: 2px;
+        }
+        .cell {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .cell.active {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>点阵屏控制面板</h1>
+    <div class="grid" id="grid"></div>
+<!--    <button onclick="sendMatrix()">发送图案</button>-->
+    <button onclick="clearGrid()">清除图案</button>
+
+
+    <script>
+        // 创建 16x32 网格
+        const rows = 16, cols = 32;
+        const grid = document.getElementById('grid');
+
+        for (let i = 0; i < rows * cols; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.addEventListener('click', () => {
+                cell.classList.toggle('active');
+                sendMatrix();
+            });
+            grid.appendChild(cell);
+        }
+
+        // 获取矩阵数据
+        function getMatrix() {
+            const matrix = [];
+            const cells = document.querySelectorAll('.cell');
+            for (let i = 0; i < rows; i++) {
+                const row = [];
+                for (let j = 0; j < cols; j++) {
+                    row.push(cells[i * cols + j].classList.contains('active') ? 1 : 0);
+                }
+                matrix.push(row);
+            }
+            return matrix;
+        }
+
+        // 发送矩阵数据到后端
+        async function sendMatrix() {
+            const matrix = getMatrix();
+            const response = await fetch('/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ matrix })
+            });
+            const result = await response.json();
+        }
+        function clearGrid() {
+            if(confirm("是否清除屏幕图案？")){
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => cell.classList.remove('active')); // 移除所有格子的 active 类
+                sendMatrix();
+            }
+        }
+
+    </script>
+</body>
+</html>
