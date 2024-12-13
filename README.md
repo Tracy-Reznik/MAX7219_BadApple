@@ -1,6 +1,6 @@
 # MAX7219_BadApple
 
-本项目是基于Arduino框架和Python语言，采用MAX7219实现的BadApple点阵屏
+本项目是基于STM32duino，Arduino框架和Python语言，采用MAX7219实现的BadApple点阵屏
 
 B站地址：https://www.bilibili.com/video/BV1ZTBMY9Euq/
 
