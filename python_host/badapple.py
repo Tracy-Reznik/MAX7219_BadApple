@@ -87,9 +87,8 @@ def play_audio(audio_path):
     pygame.mixer.music.play()
 
 
-def main():
+def main(video_path):
     # 设置路径
-    video_path = 'dwrg.mp4'
     audio_path = f'{video_path}_audio.mp3'
     frame_data_path = f'{video_path}_frames.npy'
 
@@ -104,6 +103,7 @@ def main():
     # 打开串口并发送视频帧
     try:
         with serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1) as ser:
+            print(f"即将播放 {video_path}")
             play_audio(audio_path)
             print("串口已打开，开始发送数据...")
 
@@ -123,10 +123,12 @@ def main():
 
 
 if __name__ == "__main__":
-    while True:
-        try:
-            main()
+    video_paths=['badapple.mp4']
+    try:
+        for video_path in video_paths:
+            main(video_path)
             time.sleep(2)
-        except KeyboardInterrupt:
-            print("播放已中断")
-            exit()
+    except KeyboardInterrupt:
+        print("播放已中断")
+        exit()
+
