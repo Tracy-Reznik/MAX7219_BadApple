@@ -3,3 +3,5 @@ BAUD_RATE = 2000000  # 波特率
 
 
 VIDEO_PATHS = ['badapple.mp4','gi.mp4','dwrg.mp4']
+
+LOOP = True

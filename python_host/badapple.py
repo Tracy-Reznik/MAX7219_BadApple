@@ -127,9 +127,10 @@ def main(video_path):
 if __name__ == "__main__":
     video_paths=config.VIDEO_PATHS
     try:
-        for video_path in video_paths:
-            main(video_path)
-            time.sleep(2)
+        while config.LOOP:
+            for video_path in video_paths:
+                main(video_path)
+                time.sleep(2)
     except KeyboardInterrupt:
         print("播放已中断")
         exit()
